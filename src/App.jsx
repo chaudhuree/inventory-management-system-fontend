@@ -1,4 +1,4 @@
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import './App.css';
 
 function App() {
@@ -6,8 +6,10 @@ function App() {
 
   return (
     <>
-      <h1>Inventory management system (MERN)</h1>
-      <Toaster />
+      <h1 onClick={() => toast.success("welcome here!")}>Inventory management system (MERN)</h1>
+      <Toaster position="top-right"
+        reverseOrder={false} />
+
     </>
   )
 }
