@@ -1,17 +1,125 @@
-import toast, { Toaster } from "react-hot-toast";
-import './App.css';
+{/*
+  for private routing it has a trick here.
+  we have two return here.
+  with getToken() we will check either token is available or not.
+  if token available then we will return private routing.
+  if token not available then we will return public routing.
+*/}
+import React, { Fragment } from 'react';
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import FullscreenLoader from "./components/MasterLayout/FullscreenLoader";
+import { getToken } from "./helper/SessionHelper";
+import BrandCreateUpdatePage from "./pages/Brand/BrandCreateUpdatePage";
+import BrandListPage from "./pages/Brand/BrandListPage";
+import CategoryCreateUpdatePage from "./pages/Category/CategoryCreateUpdatePage";
+import CategoryListPage from "./pages/Category/CategoryListPage";
+import CustomerCreateUpdatePage from "./pages/Customer/CustomerCreateUpdatePage";
+import CustomerListPage from "./pages/Customer/CustomerListPage";
+import DashboardPage from "./pages/Dashboard/DashboardPage";
+import ExpenseCreateUpdatePage from "./pages/Expense/ExpenseCreateUpdatePage";
+import ExpenseListPage from "./pages/Expense/ExpenseListPage";
+import ExpenseTypeCreateUpdatePage from "./pages/ExpenseType/ExpenseTypeCreateUpdatePage";
+import Page404 from "./pages/NotFound/Page404";
+import ProductCreateUpdatePage from "./pages/Product/ProductCreateUpdatePage";
+import ProductListPage from "./pages/Product/ProductListPage";
+import PurchaseCreateUpdatePage from "./pages/Purchase/PurchaseCreateUpdatePage";
+import PurchaseListPage from "./pages/Purchase/PurchaseListPage";
+import ExpenseReportPage from "./pages/Report/ExpenseReportPage";
+import PurchaseReportPage from "./pages/Report/PurchaseReportPage";
+import ReturnReportPage from "./pages/Report/ReturnReportPage";
+import SaleReportPage from "./pages/Report/SaleReportPage";
+import ReturnCreateUpdatePage from "./pages/Return/ReturnCreateUpdatePage";
+import ReturnListPage from "./pages/Return/ReturnListPage";
+import SalesCreateUpdatePage from "./pages/Sales/SalesCreateUpdatePage";
+import SalesListPage from "./pages/Sales/SalesListPage";
+import SupplierCreateUpdatePage from "./pages/Supplier/SupplierCreateUpdatePage";
+import SupplierListPage from "./pages/Supplier/SupplierListPage";
+import CreatePasswordPage from "./pages/Users/CreatePasswordPage";
+import LoginPage from "./pages/Users/LoginPage";
+import ProfilePage from "./pages/Users/ProfilePage";
+import RegistrationPage from "./pages/Users/RegistrationPage";
+import SendOTPPage from "./pages/Users/SendOTPPage";
+import VerifyOTPPage from "./pages/Users/VerifyOTPPage";
+// import ExpenseTypeList from "./components/ExpenseType/ExpenseTypeList";
+import ExpenseTypeListPage from "./pages/ExpenseType/ExpenseTypeListPage";
+const App = () => {
+  if (getToken()) {
+    {/*
+      if token available private routing
+    */}
+    return (
+      <Fragment>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/BrandCreateUpdatePage" element={<BrandCreateUpdatePage />} />
+            <Route exact path="/BrandListPage" element={<BrandListPage />} />
 
-function App() {
+            <Route exact path="/CategoryCreateUpdatePage" element={<CategoryCreateUpdatePage />} />
+            <Route exact path="/CategoryListPage" element={<CategoryListPage />} />
 
+            <Route exact path="/CustomerCreateUpdatePage" element={<CustomerCreateUpdatePage />} />
+            <Route exact path="/CustomerListPage" element={<CustomerListPage />} />
 
-  return (
-    <>
-      <h1 onClick={() => toast.success("welcome here!")}>Inventory management system (MERN)</h1>
-      <Toaster position="top-right"
-        reverseOrder={false} />
+            <Route exact path="/ExpenseTypeCreateUpdatePage" element={<ExpenseTypeCreateUpdatePage />} />
+            <Route exact path="/ExpenseTypeListPage" element={<ExpenseTypeListPage />} />
 
-    </>
-  )
-}
+            <Route exact path="/ExpenseCreateUpdatePage" element={<ExpenseCreateUpdatePage />} />
+            <Route exact path="/ExpenseListPage" element={<ExpenseListPage />} />
 
-export default App
+            <Route exact path="/ProductCreateUpdatePage" element={<ProductCreateUpdatePage />} />
+            <Route exact path="/ProductListPage" element={<ProductListPage />} />
+
+            <Route exact path="/PurchaseCreateUpdatePage" element={<PurchaseCreateUpdatePage />} />
+            <Route exact path="/PurchaseListPage" element={<PurchaseListPage />} />
+
+            <Route exact path="/ReturnCreateUpdatePage" element={<ReturnCreateUpdatePage />} />
+            <Route exact path="/ReturnListPage" element={<ReturnListPage />} />
+
+            <Route exact path="/SalesCreateUpdatePage" element={<SalesCreateUpdatePage />} />
+            <Route exact path="/SalesListPage" element={<SalesListPage />} />
+
+            <Route exact path="/SupplierCreateUpdatePage" element={<SupplierCreateUpdatePage />} />
+            <Route exact path="/SupplierListPage" element={<SupplierListPage />} />
+
+            <Route exact path="/PurchaseReportPage" element={<PurchaseReportPage />} />
+            <Route exact path="/ReturnReportPage" element={<ReturnReportPage />} />
+            <Route exact path="/SaleReportPage" element={<SaleReportPage />} />
+            <Route exact path="/ExpenseReportPage" element={<ExpenseReportPage />} />
+
+            <Route exact path="/" element={<DashboardPage />} />
+            <Route exact path="/Profile" element={<ProfilePage />} />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </BrowserRouter>
+        <Toaster position="top-right"
+          reverseOrder={false}/>
+        <FullscreenLoader />
+      </Fragment>
+    );
+  }
+  else {
+    {/*
+      public routing
+    */}
+    return (
+      <Fragment>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigate to="/Login" replace />} />
+            <Route exact path="/Login" element={<LoginPage />} />
+            <Route exact path="/Registration" element={<RegistrationPage />} />
+            <Route exact path="/SendOTP" element={<SendOTPPage />} />
+            <Route exact path="/VerifyOTP" element={<VerifyOTPPage />} />
+            <Route exact path="/CreatePassword" element={<CreatePasswordPage />} />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </BrowserRouter>
+        <Toaster position="top-right"
+          reverseOrder={false} />
+        <FullscreenLoader />
+      </Fragment>
+    );
+  }
+};
+export default App;
