@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { CustomerListRequest } from "../../APIRequest/CustomerAPIRequest";
+import { CustomerListRequest, DeleteCustomerRequest } from "../../APIRequest/CustomerAPIRequest";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/all";
@@ -46,13 +46,17 @@ const CustomerList = () => {
   }
 
   const DeleteItem = async (id) => {
-    // let Result = await DeleteAlert();
-    // if (Result.isConfirmed) {
-    //   let DeleteResult = await DeleteCustomerRequest(id)
-    //   if (DeleteResult) {
-    //     await CustomerListRequest(1, perPage, searchKeyword);
-    //   }
-    // }
+    // it is a sweetAleaert2 function
+    // if click on confirm then it will return true
+    let Result = await DeleteAlert();
+    if (Result.isConfirmed) {
+      let DeleteResult = await DeleteCustomerRequest(id)
+      if (DeleteResult) {
+        // if delete success then it will call the api again
+        // to get the updated list
+        await CustomerListRequest(1, perPage, searchKeyword);
+      }
+    }
   }
 
   return (
@@ -114,7 +118,7 @@ const CustomerList = () => {
                                     <Link to={`/CustomerCreateUpdatePage?id=${item._id}`} className="btn text-info btn-outline-light p-2 mb-0 btn-sm">
                                       <AiOutlineEdit size={15} />
                                     </Link>
-                                    <button onClick={DeleteItem.bind(this, item._id)} className="btn btn-outline-light text-danger p-2 mb-0 btn-sm ms-2">
+                                    <button onClick={() => DeleteItem(item._id)} className="btn btn-outline-light text-danger p-2 mb-0 btn-sm ms-2">
                                       <AiOutlineDelete size={15} />
                                     </button>
                                   </td>
