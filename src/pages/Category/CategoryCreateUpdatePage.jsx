@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {Fragment, Suspense} from 'react';
+import MasterLayout from "../../components/MasterLayout/MasterLayout";
+import LazyLoader from "../../components/MasterLayout/LazyLoader";
+import CategoryCreateUpdate from "../../components/Category/CategoryCreateUpdate";
 
-export default function CategoryCreateUpdatePage() {
-  return (
-    <div>CategoryCreateUpdatePage</div>
-  )
-}
+const CategoryCreateUpdatePage = () => {
+    return (
+        <Fragment>
+            <MasterLayout>
+                <Suspense fallback={<LazyLoader/>}>
+                    <CategoryCreateUpdate/>
+                </Suspense>
+            </MasterLayout>
+        </Fragment>
+    );
+};
+
+export default CategoryCreateUpdatePage;

@@ -4,8 +4,8 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/all";
 import ReactPaginate from "react-paginate";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { CategoryListRequest } from "../../APIRequest/CategoryAPIRequest";
-
+import { CategoryListRequest,DeleteCategoryRequest } from "../../APIRequest/CategoryAPIRequest";
+import {DeleteAlert} from "../../helper/DeleteAlert";
 const CategoryList = () => {
 
   let [searchKeyword, setSearchKeyword] = useState("0");
@@ -48,14 +48,13 @@ const CategoryList = () => {
 
 
   const DeleteItem = async (id) => {
-    // let Result = await DeleteAlert();
-    // if (Result.isConfirmed) {
-    //   let DeleteResult = await DeleteCategoryRequest(id)
-    //   if (DeleteResult) {
-    //     await CategoryListRequest(1, perPage, searchKeyword);
-    //   }
-    // }
-    console.log('DeleteItem');
+    let Result = await DeleteAlert();
+    if (Result.isConfirmed) {
+      let DeleteResult = await DeleteCategoryRequest(id)
+      if (DeleteResult) {
+        await CategoryListRequest(1, perPage, searchKeyword);
+      }
+    }
 
   }
 
