@@ -4,6 +4,8 @@ import profileReducer from "../state-slice/profile-slice";
 import brandReducer from "../state-slice/brand-slice";
 import categoryReducer from "../state-slice/category-slice";
 import customerReducer from "../state-slice/customer-slice";
+import expenseReducer from "../state-slice/expense-slice";
+import expensetypeReducer from "../state-slice/expensetype-slice";
 
 export default configureStore({
     reducer:{
@@ -12,5 +14,7 @@ export default configureStore({
         brand:brandReducer,
         category:categoryReducer,
         customer:customerReducer,
+        expense:expenseReducer,
+        expensetype:expensetypeReducer,
     }
 })
