@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/all";
 import ReactPaginate from "react-paginate";
-import {  SupplierListRequest } from "../../APIRequest/SupplierAPIRequest";
+import {  SupplierListRequest,DeleteSupplierRequest } from "../../APIRequest/SupplierAPIRequest";
 import { DeleteAlert } from "../../helper/DeleteAlert";
 
 const SupplierList = () => {
@@ -50,13 +50,13 @@ const SupplierList = () => {
 
 
   const DeleteItem = async (id) => {
-    // let Result = await DeleteAlert();
-    // if(Result.isConfirmed){
-    //     let DeleteResult= await DeleteSupplierRequest(id)
-    //     if(DeleteResult){
-    //         await SupplierListRequest(1,perPage,searchKeyword);
-    //     }
-    // }
+    let Result = await DeleteAlert();
+    if(Result.isConfirmed){
+        let DeleteResult= await DeleteSupplierRequest(id)
+        if(DeleteResult){
+            await SupplierListRequest(1,perPage,searchKeyword);
+        }
+    }
   }
 
   return (

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import {  ExpenseTypeListRequest } from "../../APIRequest/ExpenseTypeAPIRequest";
+import { ExpenseTypeListRequest, DeleteExpenseTypeRequest } from "../../APIRequest/ExpenseTypeAPIRequest";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/all";
@@ -46,13 +46,13 @@ const ExpenseTypeList = () => {
   }
 
   const DeleteItem = async (id) => {
-    // let Result = await DeleteAlert();
-    // if (Result.isConfirmed) {
-    //   let DeleteResult = await DeleteExpenseTypeRequest(id)
-    //   if (DeleteResult) {
-    //     await ExpenseTypeListRequest(1, perPage, searchKeyword);
-    //   }
-    // }
+    let Result = await DeleteAlert();
+    if (Result.isConfirmed) {
+      let DeleteResult = await DeleteExpenseTypeRequest(id)
+      if (DeleteResult) {
+        await ExpenseTypeListRequest(1, perPage, searchKeyword);
+      }
+    }
   }
 
 
