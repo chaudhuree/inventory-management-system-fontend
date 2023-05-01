@@ -67,15 +67,15 @@ const BrandList = () => {
               <div className="card-body">
                 <div className="container-fluid">
                   <div className="row">
-                    <div className="col-4">
+                    <div className="col-md-4 col-12">
                       <h5>Brand List</h5>
                     </div>
 
-                    <div className="col-2">
+                    <div className="col-md-2 col-6">
                       <input onKeyUp={TextSearch} placeholder="Text Filter" className="form-control form-control-sm" />
                     </div>
 
-                    <div className="col-2">
+                    <div className="col-md-2 col-6">
                       <select onChange={perPageOnChange} className="form-control mx-2 form-select-sm form-select form-control-sm" >
                         <option value="20">20 Per Page</option>
                         <option value="30">30 Per Page</option>
@@ -84,7 +84,7 @@ const BrandList = () => {
                         <option value="100">200 Per Page</option>
                       </select>
                     </div>
-                    <div className="col-4">
+                    <div className="col-md-4 col-12 mt-4 mt-md-0">
                       <div className="input-group mb-3">
                         <input onChange={searchKeywordOnChange} type="text" className="form-control form-control-sm" placeholder="Search.." aria-label="Recipient's username" aria-describedby="button-addon2" />
                         <button onClick={searchData} className="btn  btn-success btn-sm mb-0" type="button">Search</button>
