@@ -4,7 +4,8 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/all";
 import ReactPaginate from "react-paginate";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { BrandListRequest } from "../../APIRequest/BrandAPIRequest";
+import { BrandListRequest, DeleteBrandRequest } from "../../APIRequest/BrandAPIRequest";
+import {DeleteAlert} from "../../helper/DeleteAlert";
 const BrandList = () => {
 
   let [searchKeyword, setSearchKeyword] = useState("0");
@@ -47,13 +48,13 @@ const BrandList = () => {
 
 
   const DeleteItem = async (id) => {
-    // let Result = await DeleteAlert();
-    // if (Result.isConfirmed) {
-    //   let DeleteResult = await DeleteBrandRequest(id)
-    //   if (DeleteResult) {
-    //     await BrandListRequest(1, perPage, searchKeyword);
-    //   }
-    // }
+    let Result = await DeleteAlert();
+    if (Result.isConfirmed) {
+      let DeleteResult = await DeleteBrandRequest(id)
+      if (DeleteResult) {
+        await BrandListRequest(1, perPage, searchKeyword);
+      }
+    }
 
   }
 
@@ -140,7 +141,7 @@ const BrandList = () => {
                           breakLabel="..."
                           breakClassName="page-item"
                           breakLinkClassName="page-link"
-                          pageCount={Total / perPage}
+                          pageCount={Math.ceil(Total / perPage)}
                           marginPagesDisplayed={2}
                           pageRangeDisplayed={5}
                           onPageChange={handlePageClick}
