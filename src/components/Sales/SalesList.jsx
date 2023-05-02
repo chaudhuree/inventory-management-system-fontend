@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { SaleListRequest } from "../../APIRequest/SaleAPIRequest";
+import { Modal, Button } from 'antd';
+import { SaleListRequest, SaleDetailsByID } from "../../APIRequest/SaleAPIRequest";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit, AiOutlineEye } from "react-icons/all";
@@ -7,10 +8,24 @@ import ReactPaginate from "react-paginate";
 import CurrencyFormat from "react-currency-format";
 import moment from "moment/moment";
 
+
 const SalesList = () => {
   let [searchKeyword, setSearchKeyword] = useState("0");
   let [perPage, setPerPage] = useState(20);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
+  // modal related code start
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  // modal related code end
   useEffect(() => {
     (async () => {
       await SaleListRequest(1, perPage, searchKeyword);
@@ -44,11 +59,32 @@ const SalesList = () => {
       row.style.display = (row.innerText.toLowerCase().includes(e.target.value.toLowerCase())) ? '' : 'none'
     })
   }
-  const DetailsPopUp = (item) => {
+
+
+  const DetailsPopUp = async (saleID) => {
+
+    const data = await SaleDetailsByID(saleID)
+
+    const resultData = data.map((item, index) => {
+      return (
+        {
+          Qty: item.Qty,
+          UnitCost: item.UnitCost,
+          BrandName: item.brands[0].Name,
+          ProductName: item.products[0].Name
+
+        }
+      )
+    })
+    setModalData(resultData)
+    console.log('modalData', modalData);
+
+    showModal()
 
   }
   return (
     <Fragment>
+
       <div className="container-fluid my-5">
         <div className="row">
           <div className="col-12">
@@ -140,7 +176,7 @@ const SalesList = () => {
                                   </td>
 
                                   <td>
-                                    <button onClick={DetailsPopUp.bind(this, item)} className="btn btn-outline-light text-success p-2 mb-0 btn-sm ms-2">
+                                    <button onClick={DetailsPopUp.bind(this, item._id)} className="btn btn-outline-light text-success p-2 mb-0 btn-sm ms-2">
                                       <AiOutlineEye size={15} />
                                     </button>
                                   </td>
@@ -180,6 +216,37 @@ const SalesList = () => {
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <div className="row">
+
+          <div className="col-12">
+          <Modal title={`${modalData?.length} ${modalData?.length % 2 === 0 ? 'items' : 'item'}`} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Qty</th>
+                <th scope="col">UnitCost</th>
+                <th scope="col">BrandName</th>
+                <th scope="col">ProductName</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                modalData?.map((item, i) =>
+                  <tr key={i} className="text-center">
+                    <td>{item.Qty}</td>
+                    <td>{item.UnitCost}</td>
+                    <td>{item.BrandName}</td>
+                    <td>{item.ProductName}</td>
+                  </tr>
+                )
+              }
+            </tbody>
+          </table>
+        </Modal>
           </div>
         </div>
       </div>

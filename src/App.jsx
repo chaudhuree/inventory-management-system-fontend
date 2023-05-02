@@ -6,6 +6,7 @@
   if token not available then we will return public routing.
 */}
 import React, { Fragment } from 'react';
+import 'antd/dist/antd.css';
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import FullscreenLoader from "./components/MasterLayout/FullscreenLoader";

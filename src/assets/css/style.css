@@ -45,3 +45,6 @@ td div {
   word-break: break-all;
   display: block;
 }
+.sticky-top{
+  z-index: 0 !important;
+}
