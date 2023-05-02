@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {Fragment, Suspense} from 'react';
+import MasterLayout from "../../components/MasterLayout/MasterLayout";
+import LazyLoader from "../../components/MasterLayout/LazyLoader";
+import SaleReport from "../../components/Report/SaleReport";
 
-export default function SaleReportPage() {
-  return (
-    <div>SaleReportPage</div>
-  )
-}
+const SaleReportPage = () => {
+    return (
+        <Fragment>
+            <MasterLayout>
+                <Suspense fallback={<LazyLoader/>}>
+                    <SaleReport/>
+                </Suspense>
+            </MasterLayout>
+        </Fragment>
+    );
+};
+
+export default SaleReportPage;

@@ -15,16 +15,16 @@ const AxiosHeader = { headers: { "token": getToken() } }
 
 export async function ExpensesSummary() {
   try {
-    debugger;
+    
     store.dispatch(ShowLoader())
-    debugger;
+    
     let URL = BaseURL + "/ExpensesSummary";
-    debugger;
+    
     let res = await axios.get(URL, AxiosHeader)
-    debugger;
+    
     store.dispatch(HideLoader())
     if (res.status === 200) {
-      debugger;
+      
       store.dispatch(SetExpenseChart(res.data['data'][0]['Last30Days']))
       store.dispatch(SetExpenseTotal(res.data['data'][0]['Total'][0]['TotalAmount']))
     }
