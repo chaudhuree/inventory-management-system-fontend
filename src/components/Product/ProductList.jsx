@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import {  ProductListRequest } from "../../APIRequest/ProductAPIRequest";
+import {  ProductListRequest,DeleteProductRequest } from "../../APIRequest/ProductAPIRequest";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/all";
@@ -54,13 +54,13 @@ const ProductList = () => {
   }
 
   const DeleteItem = async (id) => {
-    // let Result = await DeleteAlert();
-    // if (Result.isConfirmed) {
-    //   let DeleteResult = await DeleteProductRequest(id)
-    //   if (DeleteResult) {
-    //     await ProductListRequest(1, perPage, searchKeyword);
-    //   }
-    // }
+    let Result = await DeleteAlert();
+    if (Result.isConfirmed) {
+      let DeleteResult = await DeleteProductRequest(id)
+      if (DeleteResult) {
+        await ProductListRequest(1, perPage, searchKeyword);
+      }
+    }
   }
 
 
