@@ -1,8 +1,11 @@
 import React, { Fragment, useRef } from 'react';
 import { Accordion, Container, Navbar } from 'react-bootstrap';
 import toast from 'react-hot-toast';
-import { AiOutlineBank, AiOutlineLogout, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
-import { AiOutlineUnorderedList, IoCreateOutline, RiDashboardLine, TbTruckDelivery } from 'react-icons/all';
+import { AiOutlineBank, AiOutlineLogout, AiOutlineMenu, AiOutlineUser,AiOutlineUnorderedList } from 'react-icons/ai';
+import {TbTruckDelivery} from 'react-icons/tb';
+import {IoCreateOutline} from 'react-icons/io5';
+import {RiDashboardLine} from 'react-icons/ri';
+// import { AiOutlineUnorderedList, IoCreateOutline, RiDashboardLine, TbTruckDelivery } from 'react-icons/all';
 import { BsBagPlus, BsBagX, BsBox, BsCartPlus, BsCircle, BsGraphUp, BsPeople } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 import logo from "../../assets/images/Logo.svg";
